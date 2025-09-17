@@ -11,7 +11,8 @@ def derive(x, y, m, w, b):
     dj_b = 0
 
     for i in range(m):
-        err = (np.dot(w, x[i]) + b - y[i])
+        pred = 1 / (1 + np.exp(-(np.dot(w, x[i]) + b)))
+        err = pred - y[i]
         for j in range(p):
             dj_w[j] += err * x[i][j]
         dj_b += err
@@ -54,3 +55,4 @@ for k in range(len(w_arr)):
     w_arr[k] = round(w_arr[k], 2)
 
 print(f"y = 1 / (1 + exp({w_arr}.x_vec + {b}))")
+
